@@ -218,8 +218,10 @@ main img {
 
 .icon {
   display: inline-block;
-  height: 24px;
-  width: 24px;
+  height: 1em;
+  width: 1em;
+  margin-right: 0.5em;
+  transform: translateY(0.1em);
 }
 
 .icon img {
@@ -255,3 +257,4 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
