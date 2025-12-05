@@ -131,6 +131,12 @@ function convertVideoLinks(slide) {
   const videoLinks = slide.querySelectorAll('a[href$=".mp4"]');
   videoLinks.forEach((link) => {
     const videoUrl = link.getAttribute('href');
+    const container = link.parentElement;
+    
+    // Check if there's a picture or img element in the container
+    const picture = container.querySelector('picture');
+    const img = container.querySelector('img');
+    
     const video = document.createElement('video');
     
     // Set properties directly for better browser compatibility
@@ -145,14 +151,38 @@ function convertVideoLinks(slide) {
     video.setAttribute('loop', 'loop');
     video.setAttribute('playsinline', 'playsinline');
     
+    // If there's an image, use it as poster and hide video initially
+    if (img && img.src) {
+      video.setAttribute('poster', img.src);
+      video.style.opacity = '0';
+      video.style.transition = 'opacity 0.3s ease-in-out';
+    }
+    
     const source = document.createElement('source');
     source.setAttribute('src', videoUrl);
     source.setAttribute('type', 'video/mp4');
     
     video.appendChild(source);
     
-    // Replace the link with the video
-    link.parentElement.replaceChild(video, link);
+    // Add the video to the container (don't replace the link yet if there's an image)
+    if (picture || img) {
+      // Keep the picture/img visible, add video hidden
+      container.appendChild(video);
+      
+      // When video is ready to play, fade it in and remove the image
+      video.addEventListener('canplay', () => {
+        video.style.opacity = '1';
+        // Remove picture/img after fade-in completes
+        setTimeout(() => {
+          if (picture) picture.remove();
+          if (img && !picture) img.remove();
+          link.remove();
+        }, 300);
+      }, { once: true });
+    } else {
+      // No image, just replace the link
+      container.replaceChild(video, link);
+    }
     
     // Manually trigger play to ensure it starts
     video.play().catch((error) => {
