@@ -166,17 +166,20 @@ function convertVideoLinks(slide) {
       
       // Add the video to the container
       if (picture) {
-        // Keep the picture visible, add video hidden
+        // Extract picture from link if it's inside
+        if (link.contains(picture)) {
+          container.appendChild(picture);
+        }
+        
+        // Add video to container
         container.appendChild(video);
+        
+        // Now safe to remove the link
         link.remove();
         
-        // When video is ready to play, fade it in and remove the picture
+        // When video is ready to play, fade in video (picture stays at full opacity)
         video.addEventListener('canplay', () => {
           video.style.opacity = '1';
-          // Remove picture after fade-in completes
-          setTimeout(() => {
-            picture.remove();
-          }, 300);
         }, { once: true });
       } else {
         // No picture, just replace the link
@@ -192,13 +195,17 @@ function convertVideoLinks(slide) {
     // If there's a picture with an image, wait for it to load before creating the video
     if (picture && img) {
       if (img.complete) {
-        // Image already loaded
-        loadVideo();
+        // Image already loaded - delay 1s before loading video
+        setTimeout(() => loadVideo(), 1000);
       } else {
-        // Wait for image to load
-        img.addEventListener('load', loadVideo, { once: true });
+        // Wait for image to load, then delay 1s before loading video
+        img.addEventListener('load', () => {
+          setTimeout(() => loadVideo(), 1000);
+        }, { once: true });
         // Also handle error case
-        img.addEventListener('error', loadVideo, { once: true });
+        img.addEventListener('error', () => {
+          setTimeout(() => loadVideo(), 1000);
+        }, { once: true });
       }
     } else {
       // No picture, load video immediately
