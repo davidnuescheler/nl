@@ -159,8 +159,15 @@
 main > .section > div.carousel-wrapper {
   padding: 0;
   margin: 0;
+  max-width: none;
   max-height: 100vh;
   overflow: hidden;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 main > .section:has(.carousel-wrapper) {
