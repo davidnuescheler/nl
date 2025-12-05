@@ -135,7 +135,7 @@ function convertVideoLinks(slide) {
     
     // Check if there's a picture or img element in the container
     const picture = container.querySelector('picture');
-    const img = container.querySelector('img');
+    const img = picture ? picture.querySelector('img') : container.querySelector('img');
     
     const loadVideo = () => {
       const video = document.createElement('video');
@@ -152,9 +152,8 @@ function convertVideoLinks(slide) {
       video.setAttribute('loop', 'loop');
       video.setAttribute('playsinline', 'playsinline');
       
-      // If there's an image, use it as poster and hide video initially
-      if (img && img.src) {
-        video.setAttribute('poster', img.src);
+      // Hide video initially if there's an image
+      if (picture || img) {
         video.style.opacity = '0';
         video.style.transition = 'opacity 0.3s ease-in-out';
       }
@@ -169,15 +168,18 @@ function convertVideoLinks(slide) {
       if (picture || img) {
         // Keep the picture/img visible, add video hidden
         container.appendChild(video);
+        link.remove();
         
         // When video is ready to play, fade it in and remove the image
         video.addEventListener('canplay', () => {
           video.style.opacity = '1';
           // Remove picture/img after fade-in completes
           setTimeout(() => {
-            if (picture) picture.remove();
-            if (img && !picture) img.remove();
-            link.remove();
+            if (picture) {
+              picture.remove();
+            } else if (img) {
+              img.remove();
+            }
           }, 300);
         }, { once: true });
       } else {
