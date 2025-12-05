@@ -133,9 +133,9 @@ function convertVideoLinks(slide) {
     const videoUrl = link.getAttribute('href');
     const container = link.parentElement;
     
-    // Check if there's a picture or img element in the container
+    // Check if there's a picture element in the container
     const picture = container.querySelector('picture');
-    const img = picture ? picture.querySelector('img') : container.querySelector('img');
+    const img = picture ? picture.querySelector('img') : null;
     
     const loadVideo = () => {
       const video = document.createElement('video');
@@ -152,8 +152,8 @@ function convertVideoLinks(slide) {
       video.setAttribute('loop', 'loop');
       video.setAttribute('playsinline', 'playsinline');
       
-      // Hide video initially if there's an image
-      if (picture || img) {
+      // Hide video initially if there's a picture
+      if (picture) {
         video.style.opacity = '0';
         video.style.transition = 'opacity 0.3s ease-in-out';
       }
@@ -164,26 +164,22 @@ function convertVideoLinks(slide) {
       
       video.appendChild(source);
       
-      // Add the video to the container (don't replace the link yet if there's an image)
-      if (picture || img) {
-        // Keep the picture/img visible, add video hidden
+      // Add the video to the container
+      if (picture) {
+        // Keep the picture visible, add video hidden
         container.appendChild(video);
         link.remove();
         
-        // When video is ready to play, fade it in and remove the image
+        // When video is ready to play, fade it in and remove the picture
         video.addEventListener('canplay', () => {
           video.style.opacity = '1';
-          // Remove picture/img after fade-in completes
+          // Remove picture after fade-in completes
           setTimeout(() => {
-            if (picture) {
-              picture.remove();
-            } else if (img) {
-              img.remove();
-            }
+            picture.remove();
           }, 300);
         }, { once: true });
       } else {
-        // No image, just replace the link
+        // No picture, just replace the link
         container.replaceChild(video, link);
       }
       
@@ -193,8 +189,8 @@ function convertVideoLinks(slide) {
       });
     };
     
-    // If there's an image, wait for it to load before creating the video
-    if (img) {
+    // If there's a picture with an image, wait for it to load before creating the video
+    if (picture && img) {
       if (img.complete) {
         // Image already loaded
         loadVideo();
@@ -205,7 +201,7 @@ function convertVideoLinks(slide) {
         img.addEventListener('error', loadVideo, { once: true });
       }
     } else {
-      // No image, load video immediately
+      // No picture, load video immediately
       loadVideo();
     }
   });
