@@ -132,17 +132,32 @@ function convertVideoLinks(slide) {
   videoLinks.forEach((link) => {
     const videoUrl = link.getAttribute('href');
     const video = document.createElement('video');
-    video.setAttribute('autoplay', '');
-    video.setAttribute('muted', '');
-    video.setAttribute('loop', '');
-    video.setAttribute('playsinline', '');
+    
+    // Set properties directly for better browser compatibility
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    
+    // Also set attributes for HTML5 compliance
+    video.setAttribute('autoplay', 'autoplay');
+    video.setAttribute('muted', 'muted');
+    video.setAttribute('loop', 'loop');
+    video.setAttribute('playsinline', 'playsinline');
     
     const source = document.createElement('source');
     source.setAttribute('src', videoUrl);
     source.setAttribute('type', 'video/mp4');
     
     video.appendChild(source);
+    
+    // Replace the link with the video
     link.parentElement.replaceChild(video, link);
+    
+    // Manually trigger play to ensure it starts
+    video.play().catch((error) => {
+      console.log('Video autoplay failed:', error);
+    });
   });
 }
 
