@@ -4,9 +4,16 @@ header .nav-wrapper {
   width: 100%;
   z-index: 1000;
   position: fixed;
+  padding: 10px 20px;
+  box-sizing: border-box;
 }
 
 header nav {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   display: grid;
   grid-template:
@@ -21,6 +28,7 @@ header nav {
 }
 
 header nav[aria-expanded='true'] {
+  border-radius: 0;
   position: fixed;
   top: 0;
   left: 0;
