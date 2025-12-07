@@ -16,12 +16,12 @@
   --light-color: #f8f8f8;
   --dark-color: #505050;
   --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --link-color: #085a16;
+  --link-hover-color: #074311;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: "Roboto Mono", "SF Mono", "Courier New", monospace;
+  --heading-font-family: "Roboto Mono", "SF Mono", "Courier New", monospace;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -103,12 +103,16 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.25;
   scroll-margin: 40px;
+  letter-spacing: -0.02em;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
+h1 { 
+  font-size: var(--heading-font-size-xxl); 
+  letter-spacing: -0.08em;
+}
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
@@ -254,3 +258,7 @@ main .section.highlight {
   padding: 40px 0;
 }
 
+
+h1 {
+  margin-bottom: 32px;
+}

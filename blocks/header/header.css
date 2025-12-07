@@ -141,8 +141,9 @@ header .nav-brand {
   grid-area: brand;
   flex-basis: 128px;
   font-size: var(--heading-font-size-xl);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 header nav[aria-expanded='true'] .nav-brand {
@@ -196,5 +197,5 @@ header nav .nav-sections ul > li > ul {
 }
 
 header nav .nav-sections ul > li > ul > li {
-  font-weight: 400;
+  font-weight: 500;
 }
