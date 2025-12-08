@@ -44,7 +44,7 @@ header nav[aria-expanded='true'] {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 0 24px;
+  padding: 10px 44px;
   color: white;
 }
 

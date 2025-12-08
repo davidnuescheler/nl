@@ -262,3 +262,11 @@ main .section.highlight {
 h1 {
   margin-bottom: 32px;
 }
+
+main {
+  padding-top: var(--nav-height);
+}
+
+main:has(.carousel) {
+  padding-top: 0;
+}
