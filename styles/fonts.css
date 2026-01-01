@@ -18,7 +18,31 @@
   @font-face {
     font-family: nord;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     font-display: swap;
     src: url('../fonts/nord-book.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: nord;
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../fonts/nord-medium.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: nord;
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/nord-bold.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: nord;
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('../fonts/nord-black.woff2') format('woff2');
   }
