@@ -106,12 +106,14 @@ h6 {
   font-weight: 500;
   line-height: 1.25;
   scroll-margin: 40px;
+  font-weight: 300;
 }
 
 h1 { 
   font-size: var(--heading-font-size-xxl); 
 }
-h2 { font-size: var(--heading-font-size-xl); }
+h2 { font-size: var(--heading-font-size-xl); 
+}
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }

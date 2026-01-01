@@ -141,7 +141,7 @@ header .nav-brand {
   grid-area: brand;
   flex-basis: 128px;
   font-size: var(--heading-font-size-l);
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1;
   letter-spacing: -0.02em;
 }
